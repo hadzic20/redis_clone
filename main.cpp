@@ -30,6 +30,32 @@ void del_key(string key) {
 	}
 }
 
+void repl() {
+	string query;
+	string key;
+	string value;
+	cout << "> ";
+	cin >> query;
+	while (query != "q") {
+		cin >> key;
+		if (!query.compare("set")) {
+			cin >> value;
+			set_key_value(key, value);
+		}
+		else if (!query.compare("get")) {
+			cout << get_key(key) << endl;
+		}
+		else if (!query.compare("del")) {
+			del_key(key);
+		}
+		else {
+			cout << "(error) I'm sorry, I don't recognize that command" << endl;
+		}
+		cout << "> ";
+		cin >> query;
+	}
+}
+
 int main() {
 	cout << "set-get-del functions" << endl;
 }
