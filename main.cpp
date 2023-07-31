@@ -32,17 +32,31 @@ void del_key(string key) {
 }
 
 void repl() {
-	string line;
-	string query;
-	string key;
-	string value;
-	cout << "> ";
-	stringstream buff;
-	getline(cin, line);
-	buff << line;
-	buff >> query >> key >> value;
-	while (query != "q") {
-		if (!query.compare("set")) {
+	while (1) {
+		string line;
+		string query;
+		string key;
+		string value;
+		string temp;
+		stringstream buff;
+		cout << "> ";
+		getline(cin, line);
+		buff << line;
+		buff >> query >> key >> value;
+		if (query == "q")
+			break;
+		if (query == "")
+			continue;
+		if (value[0] != '"' && buff >> temp)
+			cout << "(error) ERR Syntax error" << endl;
+		else if (!query.compare("set")) {
+			if (value[0] == '"') {
+				while (buff >> temp) {
+					value += " ";
+					value += temp;
+				}
+				value = value.substr(1, value.length() - 2);
+			}
 			set_key_value(key, value);
 		}
 		else if (!query.compare("get")) {
@@ -54,11 +68,6 @@ void repl() {
 		else {
 			cout << "(error) I'm sorry, I don't recognize that command" << endl;
 		}
-		cout << "> ";
-		getline(cin, line);
-		buff.clear();
-		buff << line;
-		buff >> query >> key >> value;
 	}
 }
 
