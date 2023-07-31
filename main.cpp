@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <cstring>
 
@@ -31,15 +32,17 @@ void del_key(string key) {
 }
 
 void repl() {
+	string line;
 	string query;
 	string key;
 	string value;
 	cout << "> ";
-	cin >> query;
+	stringstream buff;
+	getline(cin, line);
+	buff << line;
+	buff >> query >> key >> value;
 	while (query != "q") {
-		cin >> key;
 		if (!query.compare("set")) {
-			cin >> value;
 			set_key_value(key, value);
 		}
 		else if (!query.compare("get")) {
@@ -52,10 +55,13 @@ void repl() {
 			cout << "(error) I'm sorry, I don't recognize that command" << endl;
 		}
 		cout << "> ";
-		cin >> query;
+		getline(cin, line);
+		buff.clear();
+		buff << line;
+		buff >> query >> key >> value;
 	}
 }
 
 int main() {
-	cout << "set-get-del functions" << endl;
+	repl();
 }
