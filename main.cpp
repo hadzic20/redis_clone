@@ -1,4 +1,4 @@
-#include "main.h"
+#include "redis.hpp"
 
 using namespace std;
 
@@ -8,9 +8,8 @@ void repl() {
     string line;
     cout << "> ";
     getline(cin, line);
-    string* args = parse(line);
+    vector<string> args = parse(line);
     string tmp = function_mapper(&hash, args);
-    delete[] args;
     if (tmp == "quit") {
       break;
     } else if (tmp == "blank line") {
