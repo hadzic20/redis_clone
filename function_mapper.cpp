@@ -1,10 +1,10 @@
 #include "redis.hpp"
 
 string function_mapper(Hash* hash, vector<string> args) {
-  if (!args[0].compare("q"))
-    return ("quit");
-  else if (!args[0].compare(""))
+  if (args.size() == 0)
     return ("blank line");
+  else if (!args[0].compare("q"))
+    return ("quit");
   else {
     if (!args[0].compare("set")) {
       return (hash->set(args[1], args[2]));

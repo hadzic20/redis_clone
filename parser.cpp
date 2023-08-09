@@ -4,10 +4,6 @@ vector<string> parse(string line) {
   size_t iterator = 0;
   size_t start = 0;
   vector<string> args;
-  if (line == "") {
-    args.push_back("");
-    return (args);
-  }
   while (iterator < line.length()) {
     while (line[iterator] == ' ' || line[iterator] == '\t') {
       iterator++;
