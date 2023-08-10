@@ -3,7 +3,7 @@
 string function_mapper(Hash* hash, vector<string> args) {
   if (args.size() == 0)
     return ("blank line");
-  else if (!args[0].compare("q"))
+  if (!args[0].compare("q"))
     return ("quit");
   if (!args[0].compare("set")) {
     return (hash->set(args));
