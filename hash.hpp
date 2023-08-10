@@ -9,6 +9,7 @@ class Hash {
   string set(vector<string> args) {
     if (args.size() < 3) {
       args.push_back("");
+      args.push_back("");
     }
     if (!my_hash.insert(pair<string, string>(args[1], args[2])).second) {
       my_hash.find(args[1])->second = args[2];
