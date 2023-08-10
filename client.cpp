@@ -19,12 +19,13 @@ int main(int argc, char* argv[]) {
     tcp::resolver::results_type endpoints =
         resolver.resolve(tcp::v4(), argv[1], argv[2]);
     tcp::socket s(io_context);
+    asio::error_code error;
     asio::connect(s, endpoints);
     while (1) {
       std::cout << "> ";
       char request[max_length];
       std::cin.getline(request, max_length);
-      if (!strcmp(request, "quit")) {
+      if (!strcmp(request, "q")) {
         break;
       }
       if (!strcmp(request, "")) {
@@ -36,7 +37,7 @@ int main(int argc, char* argv[]) {
       }
       asio::write(s, asio::buffer(request, max_length));
       char reply[max_length];
-      asio::read(s, asio::buffer(reply, max_length));
+      asio::read(s, asio::buffer(reply, max_length), error);
       std::cout << reply << std::endl;
     }
   } catch (std::exception& e) {
