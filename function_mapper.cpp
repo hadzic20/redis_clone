@@ -36,11 +36,6 @@ class Mapper {
     }
     return (hash->del(args[1]));
   }
-  /*map<string, command> mapper = {
-      {"set", set_interface},
-      {"get", get_interface},
-      {"del", del_interface},
-    };*/
 };
 
 string function_mapper(Hash* hash, vector<string> args) {
