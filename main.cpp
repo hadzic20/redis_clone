@@ -1,4 +1,6 @@
 #include "redis.hpp"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
