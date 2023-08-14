@@ -6,19 +6,20 @@ using namespace std;
 
 void repl() {
   Hash hash;
+  List list;
   while (1) {
     string line;
     cout << "> ";
     getline(cin, line);
     vector<string> args = parse(line);
-    string tmp = function_mapper(&hash, args);
+    string tmp = function_mapper(&list, &hash, args);
     if (tmp == "quit") {
       break;
-    } else if (tmp == "blank line") {
-      continue;
-    } else {
-      cout << tmp << endl;
     }
+    if (tmp == "blank line") {
+      continue;
+    }
+    cout << tmp << endl;
   }
 }
 

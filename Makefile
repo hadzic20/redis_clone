@@ -8,7 +8,7 @@ NAME = redis
 all: $(NAME) client server
 
 $(NAME):
-	$(CC) $(SRCS) $(CXXFLAGS) -o $(NAME)
+	$(CC) $(CXXFLAGS) $(SRCS) -o $(NAME)
 
 client:
 	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 client.cpp -o client
