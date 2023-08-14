@@ -1,4 +1,4 @@
-SRCS = main.cpp parser.cpp function_mapper.cpp
+SRCS = main.cpp parser.cpp
 
 CC = g++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++11
@@ -14,7 +14,7 @@ client:
 	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 client.cpp -o client
 
 server:
-	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 server.cpp parser.cpp function_mapper.cpp -o server
+	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 server.cpp parser.cpp -o server
 	
 clean:
 	rm -f $(NAME)

@@ -1,18 +1,18 @@
-#include "redis.hpp"
 #include <iostream>
 #include <vector>
+
+#include "redis.hpp"
 
 using namespace std;
 
 void repl() {
-  Hash hash;
-  List list;
+  Store store;
   while (1) {
     string line;
     cout << "> ";
     getline(cin, line);
     vector<string> args = parse(line);
-    string tmp = function_mapper(&list, &hash, args);
+    string tmp = CommandHandler::function_mapper(&store, args);
     if (tmp == "quit") {
       break;
     }

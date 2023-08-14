@@ -12,8 +12,7 @@ const int max_length = 1024;
 
 void session(tcp::socket sock) {
   try {
-    Hash hash;
-    List list;
+    Store store;
     while (1) {
       char data[max_length];
       asio::error_code error;
@@ -23,7 +22,7 @@ void session(tcp::socket sock) {
       else if (error)
         throw asio::system_error(error);
       vector<string> args = parse(data);
-      string tmp = function_mapper(&list, &hash, args);
+      string tmp = CommandHandler::function_mapper(&store, args);
       if (tmp == "quit") {
         break;
       }
