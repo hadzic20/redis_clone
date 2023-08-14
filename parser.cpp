@@ -1,4 +1,5 @@
 #include "redis.hpp"
+#include <vector>
 
 vector<string> parse(string line) {
   size_t iterator = 0;
