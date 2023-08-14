@@ -51,6 +51,7 @@ class List {
 
   string lpush(vector<string>& args) {
     auto itr = my_lists.find(args[1]);
+    
     if (itr == my_lists.end()) {
       list<string> new_list;
       size_t i = 1;
@@ -62,6 +63,7 @@ class List {
       rtrn += (new_list.size() + '0');
       return (rtrn);
     }
+
     size_t i = 1;
     while (++i < args.size()) {
       itr->second.push_front(args[i]);
@@ -129,6 +131,9 @@ class List {
     size_t nbr = 0;
     int index = start;
     string rtrn;
+    if (end < 0) {
+      end = itr->second.size() + end;
+    }
     while (++nbr <= itr->second.size() && index <= end) {
       rtrn += (nbr + '0');
       rtrn += ") ";
