@@ -9,7 +9,7 @@ void repl() {
   Store store;
   while (1) {
     string line;
-    cout << "> ";
+    cout << "\033[1;32m> \033[1;0m";
     getline(cin, line);
     vector<string> args = parse(line);
     string tmp = CommandHandler::command_handler(&store, args);

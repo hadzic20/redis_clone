@@ -23,14 +23,10 @@ void session(tcp::socket sock) {
         throw asio::system_error(error);
       vector<string> args = parse(data);
       string tmp = CommandHandler::command_handler(&store, args);
-      if (tmp == "quit") {
-        break;
-      }
-      if (tmp == "blank line") {
-        continue;
-      }
       int i = -1;
-      while (tmp[++i]) data[i] = tmp[i];
+      while (tmp[++i]) {
+        data[i] = tmp[i];
+      }
       while (i < max_length) {
         data[i++] = '\0';
       }
