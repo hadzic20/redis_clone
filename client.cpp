@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
       while (++i < parsed_request.size()) {
         request[i] = parsed_request[i];
       }
-      i = strlen(request);
+      i = parsed_request.size();
       while (i < max_length) {
         request[i++] = '\0';
       }

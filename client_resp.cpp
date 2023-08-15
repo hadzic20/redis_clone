@@ -16,6 +16,8 @@ string client_resp(char* request) {
     i = -1;
     while (++i < args.size()) {
         req += "$";
+        req += to_string(args[i].size());
+        req += "\r\n";
         req += args[i];
         req += "\r\n";
     }
