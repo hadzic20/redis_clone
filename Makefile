@@ -1,4 +1,4 @@
-SRCS = main.cpp parser.cpp
+SRCS = main.cpp parser.cpp command_handler.cpp
 
 CC = g++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++11
@@ -11,10 +11,10 @@ $(NAME):
 	$(CC) $(CXXFLAGS) $(SRCS) -o $(NAME)
 
 client:
-	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 client.cpp -o client
+	$(CC) $(CXXFLAGS) -DASIO_STANDALONE client.cpp command_handler.cpp -o client
 
 server:
-	g++ -Wall -Werror -Wextra -DASIO_STANDALONE -std=c++11 server.cpp parser.cpp -o server
+	$(CC) $(CXXFLAGS) -DASIO_STANDALONE server.cpp parser.cpp command_handler.cpp -o server
 	
 clean:
 	rm -f $(NAME)

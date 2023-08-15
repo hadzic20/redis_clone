@@ -12,7 +12,7 @@ void repl() {
     cout << "> ";
     getline(cin, line);
     vector<string> args = parse(line);
-    string tmp = CommandHandler::function_mapper(&store, args);
+    string tmp = CommandHandler::command_handler(&store, args);
     if (tmp == "quit") {
       break;
     }

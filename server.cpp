@@ -22,7 +22,7 @@ void session(tcp::socket sock) {
       else if (error)
         throw asio::system_error(error);
       vector<string> args = parse(data);
-      string tmp = CommandHandler::function_mapper(&store, args);
+      string tmp = CommandHandler::command_handler(&store, args);
       if (tmp == "quit") {
         break;
       }

@@ -1,9 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include <vector>
 
-#include "redis.hpp"
+#include "store.hpp"
 
 using namespace std;
 typedef string (*command)(const vector<string>&, Store* store);
@@ -98,32 +99,20 @@ class CommandHandler {
     return (store->lrange(args[1], stoi(args[2]), stoi(args[3])));
   }
 
-  map<string, command> functions = {
-      {"set", set_handler},
-      {"get", get_handler},
-      {"del", del_handler},
-      {"lindex", lindex_handler},
-      {"lset", lset_handler},
-      {"llen", llen_handler},
-      {"lpop", lpop_handler},
-      {"rpop", rpop_handler},
-      {"lpush", lpush_handler},
-      {"rpush", rpush_handler},
-      {"lrange", lrange_handler},
-  };
+  static map<string, command> functions;
 
  public:
-  static string function_mapper(Store* store, const vector<string> args) {
-    CommandHandler handler;
+  static string command_handler(Store* store, const vector<string> args) {
     if (args.size() == 0) {
       return ("blank line");
     }
     if (!args[0].compare("q")) {
       return ("quit");
     }
-    if (handler.functions.find(args[0]) == handler.functions.end()) {
+    if (CommandHandler::functions.find(args[0]) ==
+        CommandHandler::functions.end()) {
       return ("(error) I'm sorry, I don't recognize that command");
     }
-    return (handler.functions[args[0]](args, store));
+    return (CommandHandler::functions[args[0]](args, store));
   }
 };
