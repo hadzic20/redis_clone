@@ -12,7 +12,7 @@ const int max_length = 1024;
 
 void session(tcp::socket sock) {
   try {
-    Hash hash;
+    Store store;
     while (1) {
       char data[max_length];
       asio::error_code error;
@@ -22,19 +22,19 @@ void session(tcp::socket sock) {
       else if (error)
         throw asio::system_error(error);
       vector<string> args = parse(data);
-      string tmp = function_mapper(&hash, args);
+      string tmp = CommandHandler::command_handler(&store, args);
       if (tmp == "quit") {
         break;
-      } else if (tmp == "blank line") {
-        continue;
-      } else {
-        int i = -1;
-        while (tmp[++i]) data[i] = tmp[i];
-        while (i < max_length) {
-          data[i++] = '\0';
-        }
-        asio::write(sock, asio::buffer(data, max_length));
       }
+      if (tmp == "blank line") {
+        continue;
+      }
+      int i = -1;
+      while (tmp[++i]) data[i] = tmp[i];
+      while (i < max_length) {
+        data[i++] = '\0';
+      }
+      asio::write(sock, asio::buffer(data, max_length));
     }
   } catch (std::exception& e) {
     std::cerr << "Exception in thread: " << e.what() << "\n";
