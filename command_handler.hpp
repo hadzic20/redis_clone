@@ -11,11 +11,11 @@ typedef string (*command)(const vector<string>&, Store* store);
 
 class CommandHandler {
   static string error(int given, int expected) {
-    string rtrn = "(error) wrong number of arguments (given ";
+    string rtrn = "-wrong number of arguments (given ";
     rtrn += (given + '0');
     rtrn += ", expected ";
     rtrn += (expected + '0');
-    rtrn += ")";
+    rtrn += ")\r\n";
     return (rtrn);
   }
 
@@ -111,7 +111,7 @@ class CommandHandler {
     }
     if (CommandHandler::functions.find(args[0]) ==
         CommandHandler::functions.end()) {
-      return ("(error) I'm sorry, I don't recognize that command");
+      return ("-I'm sorry, I don't recognize that command\r\n");
     }
     return (CommandHandler::functions[args[0]](args, store));
   }

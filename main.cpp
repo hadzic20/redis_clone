@@ -19,7 +19,22 @@ void repl() {
     if (tmp == "blank line") {
       continue;
     }
-    cout << tmp << endl;
+    string rtrn = "\033[1;";
+    if (tmp[0] == '+') {
+        rtrn += "32m";
+    }
+    if (tmp[0] == '-') {
+        rtrn += "31m";
+    }
+    if (tmp[0] == ':') {
+        rtrn += "33m";
+    }
+    if (tmp[0] == '$') {
+      rtrn += "35m";
+    }
+    rtrn += tmp.substr(1, tmp.size());
+    rtrn += "\033[1;0m";
+    cout << rtrn << endl;
   }
 }
 

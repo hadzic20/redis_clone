@@ -14,7 +14,7 @@ client:
 	$(CC) $(CXXFLAGS) -DASIO_STANDALONE client.cpp command_handler.cpp client_resp.cpp parser.cpp -o client
 
 server:
-	$(CC) $(CXXFLAGS) -DASIO_STANDALONE server.cpp parser.cpp command_handler.cpp -o server
+	$(CC) $(CXXFLAGS) -DASIO_STANDALONE server.cpp parser.cpp command_handler.cpp server_resp.cpp -o server
 	
 clean:
 	rm -f $(NAME)

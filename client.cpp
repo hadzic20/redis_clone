@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
       asio::write(s, asio::buffer(request, max_length));
       char reply[max_length];
       asio::read(s, asio::buffer(reply, max_length), error);
-      std::cout << reply << std::endl;
+      std::cout << reply;
     }
   } catch (std::exception& e) {
     std::cerr << "Exception: " << e.what() << std::endl;
