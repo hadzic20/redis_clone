@@ -9,23 +9,8 @@ class ReturnValue {
   string message;
 
  public:
-    string form_message() {
-    string return_message = "";
-    if (kind == "error") {
-      return_message += "-";
-    } else if (kind == "string") {
-      return_message += "+";
-    } else if (kind == "integer") {
-      return_message += ":";
-    } else if (kind == "array") {
-      return_message += "*";
-    } else if (kind == "bulk_string") {
-      return_message += "$";
-    }
-    return_message += message;
-    return_message += "\r\n";
-    return (return_message);
-  }
+  string getMessage() { return (message); }
+  virtual string form_message() { return (NULL); }
 };
 
 class Error : public ReturnValue {
@@ -34,7 +19,13 @@ class Error : public ReturnValue {
     kind = "error";
     message = value;
   }
-
+  string form_message() {
+    string return_message = "";
+    return_message += "-";
+    return_message += message;
+    return_message += "\r\n";
+    return (return_message);
+  }
 };
 
 class MyString : public ReturnValue {
@@ -42,6 +33,13 @@ class MyString : public ReturnValue {
   MyString(string value) {
     kind = "string";
     message = value;
+  }
+  string form_message() {
+    string return_message = "";
+    return_message += "+";
+    return_message += message;
+    return_message += "\r\n";
+    return (return_message);
   }
 };
 
@@ -51,6 +49,13 @@ class Integer : public ReturnValue {
     kind = "integer";
     message = value;
   }
+  string form_message() {
+    string return_message = "";
+    return_message += ":";
+    return_message += message;
+    return_message += "\r\n";
+    return (return_message);
+  }
 };
 
 class Array : public ReturnValue {
@@ -59,6 +64,13 @@ class Array : public ReturnValue {
     kind = "array";
     message = value;
   }
+  string form_message() {
+    string return_message = "";
+    return_message += "*";
+    return_message += message;
+    return_message += "\r\n";
+    return (return_message);
+  }
 };
 
 class BulkString : public ReturnValue {
@@ -66,5 +78,12 @@ class BulkString : public ReturnValue {
   BulkString(string value) {
     kind = "bulk_string";
     message = value;
+  }
+  string form_message() {
+    string return_message = "";
+    return_message += "$";
+    return_message += message;
+    return_message += "\r\n";
+    return (return_message);
   }
 };
