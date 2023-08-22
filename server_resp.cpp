@@ -26,7 +26,7 @@ string server_resp(Store* store, string request) {
         }
         args.push_back(command);
     }
-    string answer = CommandHandler::command_handler(store, args);
+    string answer = CommandHandler::command_handler(store, args).form_message();
     if (answer[0] == '+') {
         string rtrn = "\033[1;32m";
         rtrn += answer.substr(1, answer.size());
@@ -51,5 +51,5 @@ string server_resp(Store* store, string request) {
         rtrn += "\033[1;0m";
         return (rtrn);
     }
-    return (CommandHandler::command_handler(store, args));
+    return (CommandHandler::command_handler(store, args)).form_message();
 }

@@ -34,7 +34,7 @@ void repl() {
     }
     rtrn += tmp.substr(1, tmp.size());
     rtrn += "\033[1;0m";
-    cout << rtrn << endl;
+    cout << rtrn;
   }
 }
 
