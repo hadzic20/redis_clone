@@ -1,8 +1,10 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <string>
 
 #include "asio.hpp"
+#include "redis.hpp"
 
 using asio::ip::tcp;
 
@@ -22,7 +24,7 @@ int main(int argc, char* argv[]) {
     asio::error_code error;
     asio::connect(s, endpoints);
     while (1) {
-      std::cout << "> ";
+      std::cout << "\033[1;32m> \033[1;0m";
       char request[max_length];
       std::cin.getline(request, max_length);
       if (!strcmp(request, "q")) {
@@ -31,14 +33,19 @@ int main(int argc, char* argv[]) {
       if (!strcmp(request, "")) {
         continue;
       }
-      int i = strlen(request);
+      string parsed_request = client_resp(request);
+      size_t i = -1;
+      while (++i < parsed_request.size()) {
+        request[i] = parsed_request[i];
+      }
+      i = parsed_request.size();
       while (i < max_length) {
         request[i++] = '\0';
       }
       asio::write(s, asio::buffer(request, max_length));
       char reply[max_length];
       asio::read(s, asio::buffer(reply, max_length), error);
-      std::cout << reply << std::endl;
+      std::cout << reply;
     }
   } catch (std::exception& e) {
     std::cerr << "Exception: " << e.what() << std::endl;
